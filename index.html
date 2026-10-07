@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Habib Digital Institute</title>
+<meta name="color-scheme" content="light">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0B1F3B; --steel:#2F6DAA; --gold:#F5B800; --grey:#E6EAF0; --white:#FFFFFF; --black:#0A0D12;
+  --head:'Bricolage Grotesque','Segoe UI',Roboto,Arial,sans-serif;
+  --body:'Figtree','Segoe UI',Roboto,Arial,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+html,body{background:var(--white);color:var(--navy);font-family:var(--body);font-size:17px;line-height:1.5}
+body{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+button,input{font-family:inherit}
+#page{max-width:520px;margin:0 auto}
+
+/* Accordion reveal: collapsed sections take no visible space until opened */
+.reveal{display:grid;grid-template-rows:0fr;transition:grid-template-rows .55s cubic-bezier(.2,.7,.2,1)}
+.reveal.open{grid-template-rows:1fr}
+.reveal>.revin{overflow:hidden;min-height:0}
+@media (prefers-reduced-motion:reduce){.reveal{transition:none}}
+
+.band{padding:40px 24px}
+.band-navy{background:var(--navy);color:var(--white)}
+.band-white{background:var(--white);color:var(--navy)}
+.band-navy .sub{color:#c9d5e6}
+.band-navy h1,.band-navy h2{color:var(--white)}
+
+h1{font-family:var(--head);font-weight:800;font-size:clamp(34px,9vw,46px);line-height:1.05;letter-spacing:-.02em;margin-bottom:18px}
+h2{font-family:var(--head);font-weight:800;font-size:clamp(30px,8vw,40px);line-height:1.08;letter-spacing:-.02em;margin-bottom:12px}
+p{color:inherit}
+.sub{font-size:17px;color:#2b3d57;margin-bottom:14px}
+.btn{width:100%;min-height:58px;border:0;border-radius:14px;background:var(--gold);color:var(--navy);font-family:var(--head);font-weight:800;font-size:17px;letter-spacing:.02em;cursor:pointer;transition:transform .12s ease;margin-top:18px}
+.btn:active{transform:scale(.98)}
+.btn:focus-visible,.card:focus-visible,.plan:focus-visible,.cbtn:focus-visible,input:focus-visible{outline:3px solid var(--steel);outline-offset:2px}
+.btn[disabled]{filter:saturate(.4) brightness(.95);cursor:wait}
+
+/* Hero pathway */
+.path{list-style:none;position:relative;margin:26px 0 22px;padding-left:0}
+.path::before{content:"";position:absolute;left:9px;top:10px;bottom:6px;width:2px;background:var(--steel);transform-origin:top;transform:scaleY(0);animation:draw 2.4s .3s ease forwards}
+.path li{position:relative;padding:0 0 18px 40px;font-weight:600;font-size:17px;line-height:1.35;opacity:0;animation:pop .5s ease forwards}
+.path li::before{content:"";position:absolute;left:1px;top:3px;width:18px;height:18px;border-radius:50%;background:var(--navy);border:2px solid var(--steel)}
+.path li:nth-child(1){animation-delay:.4s}.path li:nth-child(2){animation-delay:.85s}.path li:nth-child(3){animation-delay:1.3s}.path li:nth-child(4){animation-delay:1.75s}.path li:nth-child(5){animation-delay:2.2s}
+.path li.end{padding:0;height:22px;animation-delay:2.7s}
+.path li.end::before{background:var(--gold);border-color:var(--gold);animation:pulse 2s 3.2s infinite}
+@keyframes draw{to{transform:scaleY(1)}}
+@keyframes pop{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(245,184,0,.55)}70%{box-shadow:0 0 0 12px rgba(245,184,0,0)}100%{box-shadow:0 0 0 0 rgba(245,184,0,0)}}
+.tap{font-weight:600;font-size:16px;margin:4px 0 0}
+@media (prefers-reduced-motion:reduce){.path::before{transform:scaleY(1)}.path li{opacity:1;animation:none}}
+
+/* Learn section */
+.learn{list-style:none;margin:22px 0}
+.learn li{display:grid;grid-template-columns:44px 1fr;gap:14px;padding:16px 0;border-top:1px solid var(--grey)}
+.learn li:last-child{border-bottom:1px solid var(--grey)}
+.learn h3{font-family:var(--head);font-weight:800;font-size:17px;letter-spacing:.01em;margin-bottom:2px}
+.learn p{font-size:15.5px;color:#2b3d57;line-height:1.45}
+.g{width:44px;height:44px}
+.g *{transform-box:fill-box;transform-origin:center}
+.g .s{stroke:var(--steel);fill:none;stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round}
+.g .f{fill:var(--steel)} .g .y{fill:var(--gold)}
+.a1 .r{animation:ring 2.6s ease-out infinite}
+@keyframes ring{0%{transform:scale(.4);opacity:.9}100%{transform:scale(1.15);opacity:0}}
+.a2 .ln{stroke-dasharray:22;animation:dash 2.8s ease-in-out infinite}
+@keyframes dash{0%{stroke-dashoffset:22}50%,100%{stroke-dashoffset:0}}
+.a3 .b{animation:grow 2.4s ease-in-out infinite;transform-origin:bottom}
+.a3 .b:nth-child(2){animation-delay:.25s}.a3 .b:nth-child(3){animation-delay:.5s}
+@keyframes grow{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+.a4 .up{animation:climb 2.6s ease-in-out infinite}
+@keyframes climb{0%,100%{transform:translate(-3px,3px)}50%{transform:translate(3px,-3px)}}
+.a5 .hl{animation:hop 3.2s steps(1) infinite}
+@keyframes hop{0%{transform:translate(0,0)}33%{transform:translate(14px,6px)}66%{transform:translate(-4px,14px)}}
+.a6 .tv{animation:travel 2.6s linear infinite}
+@keyframes travel{0%{transform:translate(-11px,9px)}50%{transform:translate(0,-9px)}100%{transform:translate(11px,9px)}}
+.close{font-family:var(--head);font-weight:800;font-size:20px;line-height:1.25;margin:6px 0 24px}
+.close span{display:block;color:var(--steel)}
+.proof{background:var(--grey);border-radius:14px;padding:18px 18px 16px;min-height:170px;position:relative}
+.proof blockquote{font-size:16px;line-height:1.5;color:var(--navy);transition:opacity .35s ease}
+.proof cite{display:block;margin-top:12px;font-style:normal;font-weight:600;font-size:14.5px;color:var(--steel);transition:opacity .35s ease}
+.proof.fade blockquote,.proof.fade cite{opacity:0}
+
+/* Form */
+.field{margin:22px 0}
+.field label{display:block;font-weight:600;font-size:14.5px;margin-bottom:8px;color:var(--navy)}
+.inp{width:100%;min-height:56px;border:2px solid var(--grey);border-radius:12px;background:var(--grey);padding:0 16px;font-size:16px;color:var(--navy);transition:border-color .2s,background .2s}
+.inp::placeholder{color:#6b7a90}
+.inp:focus{border-color:var(--steel);background:var(--white);outline:none}
+.phone{display:flex;gap:10px}
+.cbtn{flex:0 0 auto;min-height:56px;border:2px solid var(--grey);background:var(--grey);border-radius:12px;padding:0 12px;font-size:16px;color:var(--navy);display:flex;align-items:center;gap:8px;cursor:pointer;font-weight:600}
+.cbtn .fl{font-size:22px;line-height:1}
+.err{color:#a62b2b;font-size:14.5px;margin-top:6px;min-height:0}
+.formerr{color:#a62b2b;font-weight:600;font-size:15px;margin-top:10px;margin-bottom:0;text-align:center}
+.formerr:empty{display:none}
+#pricing .formerr{color:#ffb4b4}
+.sheet{position:fixed;inset:0;background:rgba(11,31,59,.55);display:none;align-items:flex-end;justify-content:center;z-index:50}
+.sheet.open{display:flex}
+.sheet .box{background:var(--white);width:100%;max-width:520px;max-height:80dvh;border-radius:18px 18px 0 0;display:flex;flex-direction:column;animation:riseIn .3s ease both}
+@keyframes riseIn{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+.sheet .top{padding:16px 16px 8px}
+.sheet .top .inp{min-height:50px}
+.sheet .list{overflow-y:auto;padding:4px 8px calc(12px + env(safe-area-inset-bottom))}
+.crow{width:100%;display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;text-align:left;background:none;border:0;padding:13px 10px;font-size:16px;color:var(--navy);border-radius:10px;cursor:pointer}
+.crow:active,.crow:hover{background:var(--grey)}
+.crow .fl{font-size:24px}
+.crow .dc{color:#4b5d78;font-weight:600}
+
+/* Questions */
+.qwrap{position:relative}
+.qstep{display:none}
+.qstep.show{display:block;animation:qin .4s cubic-bezier(.2,.7,.2,1) both}
+@keyframes qin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qcount{font-size:14.5px;color:var(--steel);font-weight:600;margin-bottom:8px}
+.qtitle{font-family:var(--head);font-weight:800;font-size:clamp(26px,7vw,32px);line-height:1.12;letter-spacing:-.01em;margin-bottom:6px}
+.micro{color:#3a4d69;font-size:15.5px;margin-bottom:20px}
+.cards{display:grid;gap:12px}
+.card{width:100%;text-align:left;min-height:64px;padding:16px 18px;border:2px solid var(--grey);background:var(--grey);border-radius:14px;font-size:17px;font-weight:500;color:var(--navy);cursor:pointer;transition:transform .15s ease,background .2s,border-color .2s,color .2s}
+.card:active{transform:scale(.985)}
+.card.sel{background:var(--navy);border-color:var(--navy);color:var(--white);transform:scale(1.01)}
+.card.sel::after{content:"";float:right;width:10px;height:18px;border:solid var(--gold);border-width:0 3px 3px 0;transform:rotate(45deg);margin-top:-2px}
+
+/* Pricing */
+.plans{display:grid;gap:14px;margin-top:22px}
+.plan-item{border-radius:16px;overflow:hidden;border:2px solid var(--steel)}
+.plan{display:flex;flex-direction:column;align-items:flex-start;gap:4px;width:100%;text-align:left;padding:18px 18px 16px;background:transparent;border:0;color:var(--white);cursor:pointer;transition:background .2s,color .2s}
+.plan:active{transform:scale(.995)}
+.plan .pn{font-family:var(--head);font-weight:800;font-size:19px;line-height:1.2}
+.plan .pp{font-family:var(--head);font-weight:800;font-size:32px;line-height:1.1;letter-spacing:-.01em;color:var(--gold)}
+.plan .al{font-size:14px;color:#c9d5e6;min-height:0}
+.plan .pd{font-size:16px;line-height:1.4;color:#e6ecf5;margin-top:6px}
+.plan .pf{display:block;font-size:13px;color:#c9d5e6;margin-top:8px;line-height:1.4}
+.plan-item.open .plan{background:var(--gold);color:var(--navy)}
+.plan-item.open .plan .pp,.plan-item.open .plan .al,.plan-item.open .plan .pd,.plan-item.open .plan .pf{color:var(--navy)}
+.detail{background:var(--white);color:var(--navy);padding:20px 18px 24px}
+.purg{display:inline-block;background:var(--grey);color:var(--navy);font-weight:600;font-size:14.5px;line-height:1.3;padding:8px 12px;border-radius:10px;margin:0 0 4px}
+.pdfline{font-size:13.5px;color:#3a4d69;margin:6px 0 0;line-height:1.4}
+.pintro{font-family:var(--head);font-weight:800;font-size:18px;line-height:1.25;margin:16px 0 4px}
+.psec{font-family:var(--head);font-weight:800;font-size:14px;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);margin:22px 0 4px}
+.pitems{list-style:none}
+.pitems li{position:relative;padding:14px 0 14px 26px;border-top:1px solid var(--grey)}
+.pitems li:first-child{border-top:0}
+.pitems li::before{content:"";position:absolute;left:2px;top:22px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+.pitems h3{font-family:var(--head);font-weight:800;font-size:16.5px;line-height:1.25;margin-bottom:2px}
+.pitems p{font-size:15px;color:#2b3d57;line-height:1.45}
+.linkbtn{display:block;width:100%;margin-top:4px;background:none;border:0;color:var(--steel);font-weight:600;font-size:16px;min-height:40px;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+
+/* Exit intent modal */
+.exit-modal-overlay{display:none;position:fixed;inset:0;background:rgba(10,13,18,.72);z-index:99999;justify-content:center;align-items:center;padding:20px;box-sizing:border-box}
+.exit-modal-overlay.open{display:flex}
+.exit-modal-card{background:var(--white);max-width:440px;width:100%;padding:28px 24px;border-radius:16px;box-shadow:0 20px 50px rgba(11,31,59,.35);position:relative;text-align:center;animation:emIn .3s ease-out}
+@keyframes emIn{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+.exit-modal-close{position:absolute;top:10px;right:12px;width:36px;height:36px;font-size:22px;font-weight:700;color:#4b5d78;cursor:pointer;border:none;background:none;line-height:1}
+.exit-modal-badge{display:inline-block;background:var(--grey);color:var(--navy);font-family:var(--head);font-size:12px;font-weight:800;letter-spacing:.05em;padding:5px 12px;border-radius:20px;margin-bottom:14px;text-transform:uppercase}
+.exit-modal-card h2{font-family:var(--head);font-weight:800;font-size:22px;color:var(--navy);margin-bottom:10px;line-height:1.2}
+.exit-modal-card p{font-size:15.5px;color:#2b3d57;line-height:1.5;margin-bottom:8px}
+.exit-modal-approx{font-size:13.5px;color:#4b5d78;margin-bottom:18px}
+.exit-modal-cta{display:block;width:100%;background:var(--gold);color:var(--navy);text-decoration:none;font-family:var(--head);font-weight:800;font-size:16px;padding:15px;border-radius:12px;text-align:center;min-height:52px}
+.exit-modal-decline{display:block;margin-top:14px;font-size:13.5px;color:#4b5d78;text-decoration:underline;text-underline-offset:3px;cursor:pointer;background:none;border:none;width:100%}
+@media (prefers-reduced-motion:reduce){.exit-modal-card{animation:none}}
+
+.center{text-align:center;padding:10px 0}
+.spin{width:30px;height:30px;border:3px solid var(--grey);border-top-color:var(--gold);border-radius:50%;animation:sp 1s linear infinite;margin:0 auto 14px}
+@keyframes sp{to{transform:rotate(360deg)}}
+.plan-item.open .detail .spin{border-color:var(--grey);border-top-color:var(--steel)}
+</style>
+</head>
+<body>
+<div id="page">
+
+<section id="hero" class="band band-navy">
+  <div class="inner">
+    <h1>In January you promised yourself this year would be different.</h1>
+    <p class="sub">It is October. Your account is still empty. Your mates are earning &#8358;200,000 a month from AI. You are still "preparing."</p>
+    <ul class="path" aria-label="Things you may be feeling">
+      <li>You watch AI videos every day but have not earned one naira.</li>
+      <li>You keep saying you will start when you are ready.</li>
+      <li>You do not want more information. You want your first income.</li>
+      <li class="end" aria-hidden="true"></li>
+    </ul>
+    <p class="tap">If this is you, tap below.</p>
+    <button class="btn" id="b1">SHOW ME HOW</button>
+  </div>
+</section>
+
+<div class="reveal" id="r_form"><div class="revin">
+<section id="form" class="band band-white">
+  <div class="inner">
+    <h2>What should we call you?</h2>
+    <p class="sub">Just a few details to get you started.</p>
+    <div class="field">
+      <label for="fname">Full name</label>
+      <input class="inp" id="fname" type="text" autocomplete="name" placeholder="Enter your full name">
+      <div class="err" id="e_name"></div>
+    </div>
+    <div class="field">
+      <label for="fphone">WhatsApp or phone number</label>
+      <div class="phone">
+        <button type="button" class="cbtn" id="cbtn" aria-label="Choose country"><span class="fl" id="cfl"></span><span id="ccode"></span></button>
+        <input class="inp" id="fphone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="Phone number">
+      </div>
+      <div class="err" id="e_phone"></div>
+    </div>
+    <div class="field">
+      <label for="femail">Email</label>
+      <input class="inp" id="femail" type="email" autocomplete="email" placeholder="Enter your email address">
+      <div class="err" id="e_email"></div>
+    </div>
+    <div class="formerr" id="e_form" role="alert"></div>
+    <button class="btn" id="b3">LET'S GO</button>
+  </div>
+</section>
+</div></div>
+
+<div class="reveal" id="r_questions"><div class="revin">
+<section id="questions" class="band band-white">
+  <div class="inner">
+    <h2>Tell us what brought you here</h2>
+    <p class="sub">No perfect answer, just what fits.</p>
+    <div class="qwrap" id="qwrap"></div>
+  </div>
+</section>
+</div></div>
+
+<div class="reveal" id="r_pricing"><div class="revin">
+<section id="pricing" class="band band-navy">
+  <div class="inner">
+    <h2>One last thing</h2>
+    <p class="sub">Pick one to see what is inside. Price goes up soon.</p>
+    <div class="plans" id="amts">
+
+      <div class="plan-item" id="pi_10000">
+        <button class="plan" data-v="10000">
+          <span class="pn">AI Essentials Pack</span>
+          <span class="pp">&#8358;10,000</span>
+          <span class="al" id="al_10000"></span>
+          <span class="pd">Self paced AI prompt vault &amp; smartphone setup guides for DIY learners.</span>
+          <span class="pf">"I used a clear prompt to get an appointment with a top government official." (Omony Denis, HDI AI student)</span>
+        </button>
+        <div class="reveal" id="rp_10000"><div class="revin"><div class="detail" id="dt_10000"></div></div></div>
+      </div>
+
+      <div class="plan-item" id="pi_25000">
+        <button class="plan" data-v="25000">
+          <span class="pn">Full AI Business System (VIP)</span>
+          <span class="pp">&#8358;25,000</span>
+          <span class="al" id="al_25000"></span>
+          <span class="pd">Complete system with done for you client scripts and access to the VIP Live Cohort.</span>
+          <span class="pf">"This helped me close one of my clients I almost lost." (Yahaya Udin, HDI student)</span>
+        </button>
+        <div class="reveal" id="rp_25000"><div class="revin"><div class="detail" id="dt_25000"></div></div></div>
+      </div>
+
+    </div>
+    <div class="formerr" id="e6" role="alert"></div>
+  </div>
+</section>
+</div></div>
+
+</div>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Choose country">
+  <div class="box">
+    <div class="top"><input class="inp" id="csearch" type="search" placeholder="Search country" autocomplete="off"></div>
+    <div class="list" id="clist"></div>
+  </div>
+</div>
+
+<div id="exitIntentModal" class="exit-modal-overlay" role="dialog" aria-modal="true" aria-label="Special offer">
+  <div class="exit-modal-card">
+    <button class="exit-modal-close" id="emClose" aria-label="Close">&times;</button>
+    <span class="exit-modal-badge">Before you go</span>
+    <h2>Is &#8358;10,000 too steep today?</h2>
+    <p>Don't leave empty handed. Grab <strong>"You Already Have The Skills"</strong> for just <strong>&#8358;3,000</strong> and start monetizing what you already know today.</p>
+    <div class="exit-modal-approx" id="emApprox"></div>
+    <a href="EXIT_URL_PLACEHOLDER" id="emCta" class="exit-modal-cta">Get the book for &#8358;3,000 now</a>
+    <button class="exit-modal-decline" id="emDecline">No thanks, I will pass on this for now</button>
+  </div>
+</div>
+
+<script>
+
+/* ============ CONFIG ============ */
+const PIXEL_ID = "987425530787333";
+const SAVE_ENDPOINT = "https://hook.us2.make.com/kcvudsxjtqhpe80ng6hhtqrjs0mx4uhx";
+const CHECKOUT = {10000:"https://nestuge.com/aiessentials",25000:"https://nestuge.com/aibusinesssytem"};
+const EXIT_DOWNSELL_URL = "https://nestuge.com/youhavetheskill";
+/* ================================ */
+
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+try{fbq('init',PIXEL_ID);fbq('track','PageView');}catch(e){}
+function px(name,custom){try{ if(custom){fbq('trackCustom',name)} else {fbq('track',name)} }catch(e){} }
+
+const $=id=>document.getElementById(id);
+
+/* ---------- Accordion reveal helper ---------- */
+function reveal(id,scroll){
+  const el=$(id); if(!el)return;
+  el.classList.add('open');
+  if(scroll!==false){
+    setTimeout(()=>{ el.scrollIntoView({behavior:'smooth',block:'start'}); },260);
+  }
+}
+function collapse(id){ const el=$(id); if(el)el.classList.remove('open'); }
+
+/* ---------- Lead state ---------- */
+const qs=new URLSearchParams(location.search);
+function uid(){const a=new Uint8Array(5);(window.crypto||{getRandomValues:x=>x.forEach((_,i)=>x[i]=Math.random()*255)}).getRandomValues(a);return "HDI-"+Array.from(a,b=>b.toString(36).padStart(2,"0")).join("").toUpperCase();}
+const lead={
+  hdi_id:uid(),
+  pz_code:qs.get("pz")||qs.get("pz_code")||null,
+  full_name:"",country:"",country_code:"",phone:"",phone_international:"",email:"",
+  why_here:"",want_to_learn:"",ai_help:"",investment:null,
+  current_page:"hero",journey_status:"started",
+  utm_source:qs.get("utm_source"),utm_medium:qs.get("utm_medium"),utm_campaign:qs.get("utm_campaign"),utm_content:qs.get("utm_content"),utm_term:qs.get("utm_term"),
+  fbclid:qs.get("fbclid"),referrer:document.referrer||null
+};
+
+async function post(body,key){
+  if(!SAVE_ENDPOINT)return false;
+  const delays=[0,700,1600];
+  for(let i=0;i<delays.length;i++){
+    if(delays[i])await new Promise(r=>setTimeout(r,delays[i]));
+    try{
+      const r=await fetch(SAVE_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(Object.assign({idempotency_key:key},body)),keepalive:true});
+      if(r.ok)return true;
+    }catch(e){
+      try{
+        const f=new URLSearchParams(); const all=Object.assign({idempotency_key:key},body);
+        Object.keys(all).forEach(k=>f.append(k,all[k]==null?"":all[k]));
+        await fetch(SAVE_ENDPOINT,{method:"POST",mode:"no-cors",body:f,keepalive:true});
+        return true;
+      }catch(e2){}
+    }
+  }
+  return false;
+}
+function saveLead(status,event){
+  lead.journey_status=status;
+  const body={kind:"lead",event:event||status,...lead,timestamp:new Date().toISOString()};
+  return post(body,lead.hdi_id+":"+status);
+}
+function beaconSave(status,event){
+  lead.journey_status=status;
+  const body={kind:"lead",event:event||status,...lead,timestamp:new Date().toISOString()};
+  if(!SAVE_ENDPOINT)return false;
+  try{
+    if(navigator.sendBeacon){
+      const blob=new Blob([JSON.stringify(body)],{type:"application/json"});
+      return navigator.sendBeacon(SAVE_ENDPOINT,blob);
+    }
+  }catch(e){}
+  return false;
+}
+function logEvent(event){
+  post({kind:"event",event,hdi_id:lead.hdi_id,pz_code:lead.pz_code,current_page:lead.current_page,timestamp:new Date().toISOString()},lead.hdi_id+":ev:"+event+":"+Date.now());
+}
+
+/* ---------- Currency ---------- */
+const CUR={NG:"NGN",GH:"GHS",SL:"SLE",KE:"KES",ZA:"ZAR",GB:"GBP",US:"USD",CA:"CAD",BJ:"XOF",CM:"XAF",CI:"XOF",SN:"XOF",TG:"XOF",LR:"LRD",GM:"GMD",UG:"UGX",TZ:"TZS",RW:"RWF",ET:"ETB",ZM:"ZMW",ZW:"USD",BW:"BWP",NA:"NAD",MW:"MWK",MZ:"MZN",AO:"AOA",EG:"EGP",MA:"MAD",DZ:"DZD",TN:"TND",AE:"AED",SA:"SAR",QA:"QAR",KW:"KWD",TR:"TRY",IN:"INR",PK:"PKR",BD:"BDT",PH:"PHP",ID:"IDR",MY:"MYR",SG:"SGD",CN:"CNY",JP:"JPY",KR:"KRW",AU:"AUD",NZ:"NZD",IE:"EUR",FR:"EUR",DE:"EUR",ES:"EUR",IT:"EUR",NL:"EUR",BE:"EUR",PT:"EUR",CH:"CHF",SE:"SEK",NO:"NOK",DK:"DKK",FI:"EUR",PL:"PLN",BR:"BRL",MX:"MXN"};
+let RATES={USD:1,NGN:1500,GHS:12,SLE:23,KES:129,ZAR:18,GBP:.75,CAD:1.37,XOF:600,XAF:600,LRD:190,GMD:70,UGX:3600,TZS:2600,RWF:1400,ETB:130,ZMW:25,BWP:13.5,NAD:18,MWK:1750,MZN:64,AOA:920,EGP:48,MAD:9.5,DZD:134,TND:3.1,AED:3.67,SAR:3.75,QAR:3.64,KWD:.31,TRY:40,INR:85,PKR:280,BDT:122,PHP:57,IDR:16300,MYR:4.3,SGD:1.3,CNY:7.2,JPY:145,KRW:1380,AUD:1.55,NZD:1.68,EUR:.9,CHF:.82,SEK:10,NOK:10.3,DKK:6.7,PLN:3.7,BRL:5.5,MXN:19.5};
+function money(v,code){
+  try{return new Intl.NumberFormat("en",{style:"currency",currency:code,maximumFractionDigits:0,minimumFractionDigits:0}).format(v)}catch(e){return code+" "+Math.round(v)}
+}
+function converted(ngn,code){
+  const r=RATES[code], n=RATES.NGN; if(!r||!n)return null;
+  let v=ngn/n*r; if(v>=100)v=Math.round(v/ (v>=10000?100:10))*(v>=10000?100:10);
+  return v;
+}
+function approx(ngn){
+  const code=CUR[ctry[0]]||"USD", usd=converted(ngn,"USD");
+  const parts=[];
+  if(code!=="NGN"&&code!=="USD"){const l=converted(ngn,code); if(l)parts.push(money(l,code));}
+  if(usd)parts.push(money(usd,"USD"));
+  return parts.length?"about "+parts.join(" or "):"";
+}
+function renderAmts(){
+  [10000,25000].forEach(v=>{ const el=$("al_"+v); if(el)el.textContent=approx(v); });
+  const ea=$("emApprox"); if(ea)ea.textContent=approx(3000);
+}
+try{fetch("https://open.er-api.com/v6/latest/USD").then(r=>r.json()).then(d=>{if(d&&d.rates&&d.rates.NGN){RATES=Object.assign(RATES,d.rates);renderAmts()}}).catch(()=>{})}catch(e){}
+
+/* ---------- Country detection ---------- */
+const C=[["NG","Nigeria","234"],["GH","Ghana","233"],["SL","Sierra Leone","232"],["KE","Kenya","254"],["ZA","South Africa","27"],["GB","United Kingdom","44"],["US","United States","1"],["CA","Canada","1"],
+["BJ","Benin","229"],["CM","Cameroon","237"],["CI","Côte d'Ivoire","225"],["SN","Senegal","221"],["TG","Togo","228"],["LR","Liberia","231"],["GM","Gambia","220"],["UG","Uganda","256"],["TZ","Tanzania","255"],["RW","Rwanda","250"],["ET","Ethiopia","251"],["ZM","Zambia","260"],["ZW","Zimbabwe","263"],["BW","Botswana","267"],["NA","Namibia","264"],["MW","Malawi","265"],["MZ","Mozambique","258"],["AO","Angola","244"],["EG","Egypt","20"],["MA","Morocco","212"],["DZ","Algeria","213"],["TN","Tunisia","216"],
+["AE","United Arab Emirates","971"],["SA","Saudi Arabia","966"],["QA","Qatar","974"],["KW","Kuwait","965"],["TR","Turkey","90"],["IN","India","91"],["PK","Pakistan","92"],["BD","Bangladesh","880"],["PH","Philippines","63"],["ID","Indonesia","62"],["MY","Malaysia","60"],["SG","Singapore","65"],["CN","China","86"],["JP","Japan","81"],["KR","South Korea","82"],
+["AU","Australia","61"],["NZ","New Zealand","64"],["IE","Ireland","353"],["FR","France","33"],["DE","Germany","49"],["ES","Spain","34"],["IT","Italy","39"],["NL","Netherlands","31"],["BE","Belgium","32"],["PT","Portugal","351"],["CH","Switzerland","41"],["SE","Sweden","46"],["NO","Norway","47"],["DK","Denmark","45"],["FI","Finland","358"],["PL","Poland","48"],["BR","Brazil","55"],["MX","Mexico","52"]];
+const flag=iso=>iso.replace(/./g,c=>String.fromCodePoint(127397+c.charCodeAt(0)));
+const TZ={"Africa/Lagos":"NG","Africa/Accra":"GH","Africa/Freetown":"SL","Africa/Nairobi":"KE","Africa/Johannesburg":"ZA","Europe/London":"GB","America/Toronto":"CA","America/Vancouver":"CA","America/Edmonton":"CA","America/Winnipeg":"CA","America/Halifax":"CA","America/New_York":"US","America/Chicago":"US","America/Denver":"US","America/Los_Angeles":"US","America/Phoenix":"US","Africa/Kampala":"UG","Africa/Dar_es_Salaam":"TZ","Africa/Kigali":"RW","Africa/Addis_Ababa":"ET","Africa/Lusaka":"ZM","Africa/Harare":"ZW","Africa/Gaborone":"BW","Africa/Windhoek":"NA","Africa/Blantyre":"MW","Africa/Maputo":"MZ","Africa/Luanda":"AO","Africa/Douala":"CM","Africa/Abidjan":"CI","Africa/Dakar":"SN","Africa/Lome":"TG","Africa/Monrovia":"LR","Africa/Banjul":"GM","Africa/Porto-Novo":"BJ","Africa/Cairo":"EG","Africa/Casablanca":"MA","Africa/Algiers":"DZ","Africa/Tunis":"TN","Asia/Dubai":"AE","Asia/Riyadh":"SA","Asia/Qatar":"QA","Asia/Kuwait":"KW","Europe/Istanbul":"TR","Asia/Kolkata":"IN","Asia/Calcutta":"IN","Asia/Karachi":"PK","Asia/Dhaka":"BD","Asia/Manila":"PH","Asia/Jakarta":"ID","Asia/Kuala_Lumpur":"MY","Asia/Singapore":"SG","Asia/Shanghai":"CN","Asia/Tokyo":"JP","Asia/Seoul":"KR","Australia/Sydney":"AU","Australia/Melbourne":"AU","Australia/Perth":"AU","Australia/Brisbane":"AU","Pacific/Auckland":"NZ","Europe/Dublin":"IE","Europe/Paris":"FR","Europe/Berlin":"DE","Europe/Madrid":"ES","Europe/Rome":"IT","Europe/Amsterdam":"NL","Europe/Brussels":"BE","Europe/Lisbon":"PT","Europe/Zurich":"CH","Europe/Stockholm":"SE","Europe/Oslo":"NO","Europe/Copenhagen":"DK","Europe/Helsinki":"FI","Europe/Warsaw":"PL","America/Sao_Paulo":"BR","America/Mexico_City":"MX"};
+function detectCountry(){
+  let iso=null;
+  try{iso=TZ[Intl.DateTimeFormat().resolvedOptions().timeZone]||null}catch(e){}
+  if(!iso){try{for(const l of (navigator.languages||[navigator.language])){const m=/-([A-Za-z]{2})$/.exec(l||"");if(m&&C.some(c=>c[0]===m[1].toUpperCase())){iso=m[1].toUpperCase();break}}}catch(e){}}
+  return C.find(c=>c[0]===iso)||C[0];
+}
+let ctry=detectCountry();
+function renderCountry(){ $("cfl").textContent=flag(ctry[0]); $("ccode").textContent="+"+ctry[2]; }
+function renderList(f){
+  const q=(f||"").toLowerCase().trim(), L=$("clist"); L.innerHTML="";
+  C.filter(c=>!q||c[1].toLowerCase().includes(q)||c[2].includes(q.replace("+",""))).forEach(c=>{
+    const b=document.createElement("button"); b.type="button"; b.className="crow";
+    b.innerHTML='<span class="fl">'+flag(c[0])+'</span><span>'+c[1]+'</span><span class="dc">+'+c[2]+'</span>';
+    b.onclick=()=>{ctry=c;renderCountry();renderAmts();$("sheet").classList.remove("open");$("fphone").focus();};
+    L.appendChild(b);
+  });
+}
+$("cbtn").onclick=()=>{renderList("");$("csearch").value="";$("sheet").classList.add("open");setTimeout(()=>$("csearch").focus(),50)};
+$("csearch").oninput=e=>renderList(e.target.value);
+$("sheet").onclick=e=>{if(e.target.id==="sheet")$("sheet").classList.remove("open")};
+renderCountry();renderAmts();
+
+/* ---------- Hero -> Learn -> Form ---------- */
+$("b1").onclick=()=>{px("QualificationStarted",1);logEvent("QualificationStarted");lead.current_page="form";reveal("r_form")};
+
+function fullPhone(){
+  let d=$("fphone").value.replace(/\D/g,"");
+  if(d.startsWith(ctry[2]) && d.length>ctry[2].length+6) d=d.slice(ctry[2].length);
+  d=d.replace(/^0+/,"");
+  return d;
+}
+let busyForm=false;
+$("b3").onclick=async()=>{
+  if(busyForm)return;
+  ["e_name","e_phone","e_email","e_form"].forEach(i=>$(i).textContent="");
+  const name=$("fname").value.trim().replace(/\s+/g," "), nat=fullPhone(), email=$("femail").value.trim();
+  let ok=true;
+  if(name.length<2||(!/\S+\s+\S+/.test(name)&&name.length<3)){$("e_name").textContent="Please enter your full name.";ok=false}
+  if(nat.length<6||nat.length>13){$("e_phone").textContent="Please enter a valid phone number.";ok=false}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){$("e_email").textContent="Please enter a valid email address.";ok=false}
+  if(!ok)return;
+  busyForm=true; $("b3").disabled=true;
+  Object.assign(lead,{full_name:name,country:ctry[1],country_code:"+"+ctry[2],phone:nat,phone_international:"+"+ctry[2]+nat,email});
+  const saved=await saveLead("info_submitted","InfoSubmitted");
+  busyForm=false; $("b3").disabled=false;
+  if(!saved){$("e_form").textContent="We could not save that just now. Please try again.";return}
+  px("InfoSubmitted",1);
+  lead.current_page="questions";
+  startQ(); reveal("r_questions");
+};
+
+/* ---------- Questions ---------- */
+const Q=[
+ {k:"why",t:"Why are you here today?",m:"Pick what fits best.",o:["I want my first income from AI","I want to earn online from my phone","I want a skill people will pay me for","I am tired of preparing and want to start","I want to stop watching others earn"]},
+ {k:"learn",t:"What would you like to learn first?",m:"Getting more specific.",o:["How to make AI content people pay for","How to get my first client","How to turn my phone into a source of income","How to use AI tools without a laptop","A combination of these"]},
+ {k:"help",t:"What is stopping you from earning right now?",m:"Just one more.",o:["I do not know where to start","I started but got no result","I have no client yet","I do not have a laptop","I am not sure yet"]}
+];
+let qi=0;
+function startQ(){qi=0;drawQ()}
+function drawQ(){
+  const q=Q[qi], w=$("qwrap");
+  const cards=q.o.map((o,i)=>'<button class="card" data-i="'+i+'">'+o+'</button>').join("");
+  w.innerHTML='<div class="qstep show"><div class="qcount">Question '+(qi+1)+' of 3</div><div class="qtitle">'+q.t+'</div><p class="micro">'+q.m+'</p><div class="cards">'+cards+'</div></div>';
+  w.querySelectorAll(".card").forEach(b=>b.onclick=()=>pick(b,q));
+}
+function pick(btn,q){
+  const w=$("qwrap"); if(w.dataset.lock)return; w.dataset.lock=1;
+  w.querySelectorAll(".card").forEach(c=>c.classList.remove("sel")); btn.classList.add("sel");
+  const val=btn.textContent;
+  if(q.k==="why")lead.why_here=val; if(q.k==="learn")lead.want_to_learn=val; if(q.k==="help")lead.ai_help=val;
+  setTimeout(()=>{
+    delete w.dataset.lock;
+    if(qi<Q.length-1){qi++;drawQ()}
+    else{
+      px("QualificationCompleted",1); logEvent("QualificationCompleted"); saveLead("completed","QualificationCompleted");
+      lead.current_page="pricing"; reveal("r_pricing");
+    }
+  },480);
+}
+
+/* ---------- Pricing: build detail blocks, wire expand + checkout ---------- */
+const PLANS={
+ 10000:{name:"AI Essentials Pack",intro:"",sections:[
+  {h:"What you will learn",items:[
+   ["AI tools on your phone","Set up and use ChatGPT, Canva, CapCut and mobile AI apps on your smartphone. No laptop needed."],
+   ["AI images and visuals","Create studio quality product photos, 3D brand illustrations and realistic photoshoot visuals."],
+   ["The full AI video suite","Realistic AI photoshoot videos, cinematic AI videos and AI animation videos, all made on your phone."],
+   ["AI YouTube automation","Create and run faceless YouTube channels, from scriptwriting and voiceovers to video editing and thumbnails."],
+   ["AI social media content system","Build a daily content framework to grow your online presence."],
+   ["AI copywriting that sells","Write ad copy, captions and sales scripts using AI prompts."],
+   ["Monetize your AI skills","Package your new skills and get paid in dollars or naira."]]},
+  {h:"Included bonuses",items:[
+   ["HDI Quick Start Kit","A step by step setup guide to start generating assets on Day 1."],
+   ["HDI Prompt and Swipe Vault","100+ ready to use prompts for sales copy, graphics and video scripts."]]}]},
+ 25000:{name:"Full AI Business System (VIP)",intro:"Everything in the ₦10,000 AI Essentials Pack, plus:",sections:[
+  {h:"Business and client acquisition",items:[
+   ["AI business and client acquisition system","How to find, pitch and close paying clients for AI services."],
+   ["Scroll stopping business flyers","Design ad flyers and promotional graphics that stop people from scrolling past."],
+   ["Promotional videos that get watched","Short video ads and promo clips that hook viewers and generate sales."],
+   ["Social media content that gets inquiries","Post frameworks, offers and sales contest content that turn viewers into WhatsApp chats."],
+   ["High value AI services businesses pay for","The AI deliverables (flyers, ad videos, copy and funnels) that small businesses pay for."],
+   ["Offers and sales campaigns","Build promotional offers for physical products, digital products and services."]]},
+  {h:"Personal mentorship and live support with Ibrahim Habib",items:[
+   ["1 on 1 onboarding call","A personal phone call to review your goals and map out your execution plan."],
+   ["Step by step hand holding","Guidance while you set up your first AI digital asset."],
+   ["Personal asset review","Feedback on your copy, ad designs and offers before you launch them."],
+   ["Live VIP cohort access","Live implementation masterclasses, group coaching sessions and real time Q&A."]]},
+  {h:"Exclusive VIP bonuses",items:[
+   ["HDI 5 Step Phone Only Client System","The exact 5 step framework to sign clients using only your smartphone."],
+   ["HDI Conversion and Closing Scripts","Done for you chat templates to turn prospects into paying clients without cold calling."],
+   ["30 Day WhatsApp Status Content Calendar","Daily ready to post frameworks designed to generate inquiries."],
+   ["\u201CWe Build Together\u201D Guarantee","Step by step assistance until your first AI asset and funnel are live."]]}]}};
+const esc=t=>String(t).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+const PROOFLINE={
+ 10000:'"I used a clear prompt to get an appointment with a top government official." (Omony Denis, HDI AI student)',
+ 25000:'"This helped me close one of my clients I almost lost." (Yahaya Udin, HDI student)'
+};
+[10000,25000].forEach(v=>{
+  const P=PLANS[v];
+  let h='<div class="purg">The price will increase soon. Take action now to get today\'s price.</div>';
+  h+='<div class="pdfline">'+esc(PROOFLINE[v])+'</div>';
+  if(P.intro)h+='<p class="pintro">'+esc(P.intro)+'</p>';
+  P.sections.forEach(sec=>{
+    h+='<div class="psec">'+esc(sec.h)+'</div><ul class="pitems">'+sec.items.map(i=>'<li><h3>'+esc(i[0])+'</h3><p>'+esc(i[1])+'</p></li>').join("")+'</ul>';
+  });
+  h+='<button class="btn" id="b6_'+v+'">THIS IS FOR ME</button>';
+  h+='<div class="formerr" id="e6_'+v+'" role="alert"></div>';
+  h+='<button class="linkbtn" id="see_'+v+'">See the other option</button>';
+  $("dt_"+v).innerHTML=h;
+});
+
+function openPlan(v){
+  const other=v===10000?25000:10000;
+  collapse("rp_"+other); $("pi_"+other).classList.remove("open");
+  $("pi_"+v).classList.add("open");
+  reveal("rp_"+v,false);
+  setTimeout(()=>{ $("pi_"+v).scrollIntoView({behavior:'smooth',block:'start'}); },280);
+}
+document.querySelectorAll('#amts .plan').forEach(b=>b.onclick=()=>openPlan(+b.dataset.v));
+[10000,25000].forEach(v=>{
+  $("see_"+v).onclick=()=>openPlan(v===10000?25000:10000);
+});
+
+let busyCheckout=false;
+[10000,25000].forEach(v=>{
+  $("b6_"+v).onclick=()=>{
+    if(busyCheckout)return; busyCheckout=true;
+    lead.investment=v; lead.display_currency=CUR[ctry[0]]||"USD"; lead.selected_plan=PLANS[v].name;
+    lead.current_page="checkout";
+    const url=CHECKOUT[v];
+    beaconSave("checkout","InitiateCheckout");
+    saveLead("checkout","InitiateCheckout");
+    px("InitiateCheckout");
+    lead.checkout_url=url;
+    location.href=url;
+    setTimeout(()=>{ busyCheckout=false; },1500);
+  };
+});
+
+/* ---------- Exit intent downsell ---------- */
+(function(){
+  let shown=false;
+  const overlay=$('exitIntentModal');
+  const cta=$('emCta');
+  cta.href=EXIT_DOWNSELL_URL;
+  function open(){
+    if(shown)return;
+    shown=true; overlay.classList.add('open');
+    try{ px("DownsellOffered",1); logEvent("DownsellOffered"); }catch(e){}
+  }
+  function close(){ overlay.classList.remove('open'); }
+  $('emClose').onclick=close;
+  $('emDecline').onclick=close;
+  overlay.addEventListener('click',function(e){ if(e.target===overlay)close(); });
+  cta.addEventListener('click',function(){ try{ px("DownsellClick",1); logEvent("DownsellClick"); }catch(e){} });
+  document.addEventListener('mouseleave',function(e){ if(e.clientY<=0)open(); });
+  try{
+    history.pushState({hdiExit:1},'',location.href);
+    window.addEventListener('popstate',function(){
+      if(!shown){ open(); history.pushState({hdiExit:1},'',location.href); }
+    });
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
